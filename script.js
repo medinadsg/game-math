@@ -1,14 +1,17 @@
+let points = 0;
+let questionData;
+
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function generateQuestion() {
-  const num1 = getRandomNumber(1, 10);
+  const num1 = getRandomNumber(10, 50);
   let num2;
   let operation;
 
   do {
-    num2 = getRandomNumber(1, 10);
+    num2 = getRandomNumber(10, 50);
     operation = getRandomNumber(1, 4);
   } while (operation === 4 && (num1 % num2 !== 0 || num2 === 0));
 
@@ -79,6 +82,8 @@ function checkAnswer(questionData) {
     document.querySelector(".result").textContent = "Correct!";
     document.querySelector(".result").style.color = "#4CAF50";
     document.querySelector(".progress-bar-fill").style.width = '100%';
+    points++;
+    document.querySelector(".points").textContent = `Points: ${points}`;
   } else {
     document.querySelector(".result").textContent = `Incorrect! The correct answer is: ${questionData.correctAnswer}`;
     document.querySelector(".result").style.color = "#F44336";
@@ -86,6 +91,12 @@ function checkAnswer(questionData) {
 
   document.querySelector(".check-answer").disabled = true;
   document.querySelector(".next-question").disabled = false;
+}
+
+function gameOver() {
+  document.querySelector(".game-container").style.display = "none";
+  document.querySelector(".result-page").style.display = "block";
+  document.querySelector(".final-score").textContent = points;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -96,6 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.querySelector(".next-question").addEventListener("click", () => {
+    questionData = displayQuestion();
+  });
+
+  document.querySelector(".play-again").addEventListener("click", () => {
+    points = 0;
+    document.querySelector(".points").textContent = `Points: 0`;
+    document.querySelector(".game-container").style.display = "block";
+    document.querySelector(".result-page").style.display = "none";
     questionData = displayQuestion();
   });
 });
