@@ -1,49 +1,116 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
   text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 36px;
+  color: #4CAF50;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .game-container {
-  width: 50%;
+  width: 80%;
+  max-width: 500px;
   margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#question {
+.timer-container {
+  background-color: #4CAF50;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.timer {
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background-color: #4CAF50;
+  transition: width 0.3s ease;
+}
+
+.question {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #555;
 }
 
-#answer {
+.answer {
   width: 100%;
   height: 40px;
-  font-size: 24px;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
-#check-answer {
-  width: 100%;
-  height: 40px;
-  font-size: 24px;
+  font-size: 18px;
   padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.answer:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.check-answer,
+.next-question {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.check-answer {
   background-color: #4CAF50;
   color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
 }
 
-#check-answer:hover {
-  background-color: #3e8e41;
+.check-answer:hover {
+  background-color: #45A049;
+  transform: scale(1.05);
 }
 
-#result {
-  font-size: 24px;
+.next-question {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.next-question:hover {
+  background-color: #e53935;
+  transform: scale(1.05);
+}
+
+.result {
+  font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
 }

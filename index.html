@@ -7,13 +7,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Mental Math Game</h1>
+  <h1>Mental Math Challenge</h1>
   <div class="game-container">
-    <p id="question"></p>
-    <input type="number" id="answer" step="1" />
-    <button id="check-answer">Check Answer</button>
-    <button id="next-question" disabled>Next Question</button>
-    <p id="result"></p>
+    <div class="timer-container">
+      <p class="timer">00:30</p>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <p class="question"></p>
+    <input type="number" class="answer" step="1" placeholder="Your answer..." />
+    <button class="check-answer">Check Answer</button>
+    <button class="next-question" disabled>Next Question</button>
+    <p class="result"></p>
   </div>
   <script src="script.js"></script>
 </body>

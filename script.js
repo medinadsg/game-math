@@ -40,37 +40,62 @@ function generateQuestion() {
   return { question, correctAnswer };
 }
 
+function startTimer(duration, display, callback) {
+  let timer = duration, minutes, seconds;
+  const interval = setInterval(() => {
+    minutes = Math.floor(timer / 60);
+    seconds = timer % 60;
+
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    display.textContent = `${minutes}:${seconds}`;
+
+    if (--timer < 0) {
+      clearInterval(interval);
+      callback();
+    }
+  }, 1000);
+}
+
 function displayQuestion() {
   const questionData = generateQuestion();
-  document.getElementById("question").innerHTML = questionData.question;
-  document.getElementById("check-answer").disabled = false;
-  document.getElementById("next-question").disabled = true;
-  document.getElementById("answer").value = '';
-  document.getElementById("result").innerHTML = '';
+  document.querySelector(".question").textContent = questionData.question;
+  document.querySelector(".check-answer").disabled = false;
+  document.querySelector(".next-question").disabled = true;
+  document.querySelector(".answer").value = '';
+  document.querySelector(".result").textContent = '';
+  document.querySelector(".progress-bar-fill").style.width = '0%';
+  startTimer(30, document.querySelector(".timer"), () => {
+    checkAnswer(questionData);
+  });
   return questionData;
 }
 
 function checkAnswer(questionData) {
-  const answer = parseInt(document.getElementById("answer").value);
+  const answer = parseInt(document.querySelector(".answer").value);
 
   if (answer === questionData.correctAnswer) {
-    document.getElementById("result").innerHTML = "Correct!";
+    document.querySelector(".result").textContent = "Correct!";
+    document.querySelector(".result").style.color = "#4CAF50";
+    document.querySelector(".progress-bar-fill").style.width = '100%';
   } else {
-    document.getElementById("result").innerHTML = `Incorrect! The correct answer is: ${questionData.correctAnswer}`;
+    document.querySelector(".result").textContent = `Incorrect! The correct answer is: ${questionData.correctAnswer}`;
+    document.querySelector(".result").style.color = "#F44336";
   }
 
-  document.getElementById("check-answer").disabled = true;
-  document.getElementById("next-question").disabled = false;
+  document.querySelector(".check-answer").disabled = true;
+  document.querySelector(".next-question").disabled = false;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   let questionData = displayQuestion();
 
-  document.getElementById("check-answer").addEventListener("click", () => {
+  document.querySelector(".check-answer").addEventListener("click", () => {
     checkAnswer(questionData);
   });
 
-  document.getElementById("next-question").addEventListener("click", () => {
+  document.querySelector(".next-question").addEventListener("click", () => {
     questionData = displayQuestion();
   });
 });
